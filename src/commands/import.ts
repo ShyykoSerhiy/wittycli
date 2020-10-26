@@ -38,6 +38,7 @@ export default class Import extends Command {
       description: 'Private if flag provided.',
       char: 'p',
       required: false,
+      default: false,
     }),
     wait: flags.boolean({
       description: 'If true the cli will wait for the app training to complete via long polling.',
@@ -78,11 +79,18 @@ export default class Import extends Command {
           );
         }
         const nonNullResult = result!;
-        const newWittyClient = createWitClient({ token: nonNullResult.access_token });
-        // eslint-disable-next-line no-await-in-loop
-        while ((await newWittyClient.apps.app.get({ app: nonNullResult.app_id })).training_status !== 'done') {
-          // eslint-disable-next-line no-await-in-loop
-          await wait(/** 10 seconds */ 10 * 1000);
+        if (flags.wait) {
+          const newWittyClient = createWitClient({ token: nonNullResult.access_token });
+          let appStatus = await newWittyClient.apps.app.get({ app: nonNullResult.app_id });
+          while (
+            appStatus.training_status !== 'done' ||
+            /* initial train wasn't scheduled yet */ appStatus.will_train_at.startsWith(/* magick year */ '1969')
+          ) {
+            // eslint-disable-next-line no-await-in-loop
+            await wait(/** 10 seconds */ 10 * 1000);
+            // eslint-disable-next-line no-await-in-loop
+            appStatus = await newWittyClient.apps.app.get({ app: nonNullResult.app_id });
+          }
         }
         return nonNullResult!;
       },
