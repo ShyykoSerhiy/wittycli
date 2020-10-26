@@ -1,7 +1,7 @@
 {
   "name": "wittycli",
   "description": "Wit.ai CLI",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "bin": {
     "wittycli": "./bin/run"
   },
