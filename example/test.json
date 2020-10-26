@@ -1,0 +1,20 @@
+[
+    {
+        "text": "Get temperature",
+        "intents": [
+            {
+                "name": "get_temperature",
+                "confidence": 0.75
+            }
+        ]
+    },
+    {
+        "text": "Set temperature to 70 degrees",
+        "intents": [
+            {
+                "name": "set_temperature",
+                "confidence": 0.8
+            }
+        ]
+    }
+]

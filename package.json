@@ -1,0 +1,82 @@
+{
+  "name": "witcli",
+  "description": "Wit.ai CLI",
+  "version": "0.0.0",
+  "bin": {
+    "witcli": "./bin/run"
+  },
+  "bugs": "https://github.com/ShyykoSerhiy/witcli/issues",
+  "dependencies": {
+    "@oclif/command": "^1.8.0",
+    "@oclif/config": "^1.17.0",
+    "@oclif/plugin-help": "^3.2.0",
+    "adm-zip": "^0.4.16",
+    "bottleneck": "^2.19.5",
+    "dot-object": "^2.1.4",
+    "node-fetch": "^2.6.1",
+    "tslib": "^1.14.1"
+  },
+  "devDependencies": {
+    "@oclif/dev-cli": "^1.22.2",
+    "@oclif/test": "^1.2.7",
+    "@types/adm-zip": "^0.4.33",
+    "@types/chai": "^4.2.14",
+    "@types/dot-object": "^2.1.2",
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^10.17.40",
+    "@types/node-fetch": "^2.5.7",
+    "chai": "^4.2.0",
+    "eslint": "^5.16.0",
+    "eslint-config-oclif": "^3.1.0",
+    "eslint-config-oclif-typescript": "^0.1.0",
+    "eslint-config-prettier": "^6.14.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "globby": "^10.0.2",
+    "mocha": "^5.2.0",
+    "nyc": "^14.1.1",
+    "prettier": "^2.1.2",
+    "rimraf": "^3.0.2",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.7"
+  },
+  "engines": {
+    "node": ">=10.1.0"
+  },
+  "files": [
+    "/bin",
+    "/lib",
+    "/npm-shrinkwrap.json",
+    "/oclif.manifest.json"
+  ],
+  "homepage": "https://github.com/ShyykoSerhiy/witcli",
+  "keywords": [
+    "oclif"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShyykoSerhiy/witcli.git"
+  },
+  "author": "shyyko.serhiy",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "oclif": {
+    "commands": "./lib/commands",
+    "bin": "witcli",
+    "plugins": [
+      "@oclif/plugin-help"
+    ],
+    "topics": {
+      "apps": {
+        "description": "Manage your apps."
+      }
+    }
+  },
+  "scripts": {
+    "postpack": "rimraf oclif.manifest.json",
+    "posttest": "eslint . --ext .ts --config .eslintrc",
+    "prepack": "rimraf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
+    "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
+    "version": "oclif-dev readme && git add README.md"
+  },
+  "types": "lib/index.d.ts"
+}
