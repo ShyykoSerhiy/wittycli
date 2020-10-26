@@ -36,7 +36,7 @@ export default class Post extends Command {
 
   async run() {
     const { flags } = this.parse(Post);
-    withErrorsAndOutput(
+    await withErrorsAndOutput(
       async () => {
         const wittyClient = createWithClientFromFlags(flags);
         this.log(

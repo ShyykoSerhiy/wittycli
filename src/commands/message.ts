@@ -32,7 +32,7 @@ export default class Import extends Command {
   async run() {
     const { flags } = this.parse(Import);
 
-    withErrorsAndOutput(
+    await withErrorsAndOutput(
       async () => {
         const wittyClient = createWithClientFromFlags(flags);
 

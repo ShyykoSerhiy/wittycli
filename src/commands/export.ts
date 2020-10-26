@@ -29,7 +29,7 @@ export default class Export extends Command {
   async run() {
     const { flags } = this.parse(Export);
 
-    withErrorsAndOutput(async () => {
+    await withErrorsAndOutput(async () => {
       const wittyClient = createWithClientFromFlags(flags);
       const file = await wittyClient.export.get();
 

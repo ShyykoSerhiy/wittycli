@@ -67,7 +67,7 @@ export default class Test extends Command {
     const { flags } = this.parse(Test);
     const bottleneck = new Bottleneck({ maxConcurrent: flags.parallel });
 
-    withErrorsAndOutput(async () => {
+    await withErrorsAndOutput(async () => {
       this.log(
         chalk.yellow(
           [
