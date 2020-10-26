@@ -19,7 +19,7 @@ $ npm install -g witcli
 $ witcli COMMAND
 running command...
 $ witcli (-v|--version|version)
-witcli/0.0.0 win32-x64 node-v12.19.0
+witcli/0.0.1 win32-x64 node-v12.19.0
 $ witcli --help [COMMAND]
 USAGE
   $ witcli COMMAND
@@ -79,7 +79,7 @@ EXAMPLE
   $ witcli apps create --name=witapp --lang=en --private --timezone=Europe/Brussels
 ```
 
-_See code: [src\commands\apps\post.ts](https://github.com/Projects/witcli/blob/v0.0.0/src\commands\apps\post.ts)_
+_See code: [src\commands\apps\post.ts](https://github.com/ShyykoSerhiy/witcli/blob/v0.0.1/src\commands\apps\post.ts)_
 
 ## `witcli export`
 
@@ -116,10 +116,10 @@ OPTIONS
       json response.
 
 EXAMPLE
-  $ witcli export
+  $ witcli export --output="./app.zip"
 ```
 
-_See code: [src\commands\export.ts](https://github.com/Projects/witcli/blob/v0.0.0/src\commands\export.ts)_
+_See code: [src\commands\export.ts](https://github.com/ShyykoSerhiy/witcli/blob/v0.0.1/src\commands\export.ts)_
 
 ## `witcli help [COMMAND]`
 
@@ -182,7 +182,7 @@ EXAMPLE
   $ witcli import --name=witapp --private --file ./app.zip
 ```
 
-_See code: [src\commands\import.ts](https://github.com/Projects/witcli/blob/v0.0.0/src\commands\import.ts)_
+_See code: [src\commands\import.ts](https://github.com/ShyykoSerhiy/witcli/blob/v0.0.1/src\commands\import.ts)_
 
 ## `witcli message`
 
@@ -226,11 +226,11 @@ EXAMPLE
   $ witcli message --query="Set temperature to 70 degrees" --numberofintents=8
 ```
 
-_See code: [src\commands\message.ts](https://github.com/Projects/witcli/blob/v0.0.0/src\commands\message.ts)_
+_See code: [src\commands\message.ts](https://github.com/ShyykoSerhiy/witcli/blob/v0.0.1/src\commands\message.ts)_
 
 ## `witcli test`
 
-Tests app with the provided file of epected utterances.
+Tests the witcli app with the provided file of expected utterances.
 
 ```
 USAGE
@@ -259,8 +259,8 @@ OPTIONS
       version parameter will hit the latest version of our API.
 
 EXAMPLE
-  $ witcli test --file="./tests.json"
+  $ witcli test --file="./example/test.json"
 ```
 
-_See code: [src\commands\test.ts](https://github.com/Projects/witcli/blob/v0.0.0/src\commands\test.ts)_
+_See code: [src\commands\test.ts](https://github.com/ShyykoSerhiy/witcli/blob/v0.0.1/src\commands\test.ts)_
 <!-- commandsstop -->
