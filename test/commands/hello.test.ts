@@ -5,6 +5,6 @@ describe('help', () => {
     .stdout()
     .command(['help'])
     .it('runs help', (ctx) => {
-      expect(ctx.stdout).to.contain('display help for witcli');
+      expect(ctx.stdout).to.contain('display help for wittycli');
     });
 });

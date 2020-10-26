@@ -48,20 +48,20 @@
     "/npm-shrinkwrap.json",
     "/oclif.manifest.json"
   ],
-  "homepage": "https://github.com/ShyykoSerhiy/witcli",
+  "homepage": "https://github.com/ShyykoSerhiy/wittycli",
   "keywords": [
     "oclif"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ShyykoSerhiy/witcli.git"
+    "url": "git+https://github.com/ShyykoSerhiy/wittycli.git"
   },
   "author": "shyyko.serhiy",
   "license": "MIT",
   "main": "lib/index.js",
   "oclif": {
     "commands": "./lib/commands",
-    "bin": "witcli",
+    "bin": "wittycli",
     "plugins": [
       "@oclif/plugin-help"
     ],

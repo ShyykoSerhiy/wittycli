@@ -1,12 +1,12 @@
-witcli
+wittycli
 ======
 
 Wit.ai CLI
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
-[![Version](https://img.shields.io/npm/v/witcli.svg)](https://npmjs.org/package/witcli)
-[![Downloads/week](https://img.shields.io/npm/dw/witcli.svg)](https://npmjs.org/package/witcli)
-[![License](https://img.shields.io/npm/l/witcli.svg)](https://github.com/Projects/witcli/blob/master/package.json)
+[![Version](https://img.shields.io/npm/v/wittycli.svg)](https://npmjs.org/package/wittycli)
+[![Downloads/week](https://img.shields.io/npm/dw/wittycli.svg)](https://npmjs.org/package/wittycli)
+[![License](https://img.shields.io/npm/l/wittycli.svg)](https://github.com/Projects/wittycli/blob/master/package.json)
 
 <!-- toc -->
 * [Usage](#usage)
@@ -16,32 +16,32 @@ Wit.ai CLI
 <!-- usage -->
 ```sh-session
 $ npm install -g wittycli
-$ witcli COMMAND
+$ wittycli COMMAND
 running command...
-$ witcli (-v|--version|version)
+$ wittycli (-v|--version|version)
 wittycli/0.0.3 win32-x64 node-v12.19.0
-$ witcli --help [COMMAND]
+$ wittycli --help [COMMAND]
 USAGE
-  $ witcli COMMAND
+  $ wittycli COMMAND
 ...
 ```
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`witcli apps:post`](#witcli-appspost)
-* [`witcli export`](#witcli-export)
-* [`witcli help [COMMAND]`](#witcli-help-command)
-* [`witcli import`](#witcli-import)
-* [`witcli message`](#witcli-message)
-* [`witcli test`](#witcli-test)
+* [`wittycli apps:post`](#wittycli-appspost)
+* [`wittycli export`](#wittycli-export)
+* [`wittycli help [COMMAND]`](#wittycli-help-command)
+* [`wittycli import`](#wittycli-import)
+* [`wittycli message`](#wittycli-message)
+* [`wittycli test`](#wittycli-test)
 
-## `witcli apps:post`
+## `wittycli apps:post`
 
 Creates a new app for an existing user.
 
 ```
 USAGE
-  $ witcli apps:post
+  $ wittycli apps:post
 
 OPTIONS
   -a, --auth=auth
@@ -79,15 +79,15 @@ EXAMPLE
   $ wittycli apps create --name=witapp --lang=en --private --timezone=Europe/Brussels
 ```
 
-_See code: [src\commands\apps\post.ts](https://github.com/ShyykoSerhiy/witcli/blob/v0.0.3/src\commands\apps\post.ts)_
+_See code: [src\commands\apps\post.ts](https://github.com/ShyykoSerhiy/wittycli/blob/v0.0.3/src\commands\apps\post.ts)_
 
-## `witcli export`
+## `wittycli export`
 
 Exports Get a URL where you can download a ZIP file containing all of your app data. This ZIP file can be used to create a new app with the same data.
 
 ```
 USAGE
-  $ witcli export
+  $ wittycli export
 
 OPTIONS
   -a, --auth=auth
@@ -119,15 +119,15 @@ EXAMPLE
   $ wittycli export --output="./app.zip"
 ```
 
-_See code: [src\commands\export.ts](https://github.com/ShyykoSerhiy/witcli/blob/v0.0.3/src\commands\export.ts)_
+_See code: [src\commands\export.ts](https://github.com/ShyykoSerhiy/wittycli/blob/v0.0.3/src\commands\export.ts)_
 
-## `witcli help [COMMAND]`
+## `wittycli help [COMMAND]`
 
-display help for witcli
+display help for wittycli
 
 ```
 USAGE
-  $ witcli help [COMMAND]
+  $ wittycli help [COMMAND]
 
 ARGUMENTS
   COMMAND  command to show help for
@@ -138,13 +138,13 @@ OPTIONS
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.0/src\commands\help.ts)_
 
-## `witcli import`
+## `wittycli import`
 
 Create a new app with all the app data from the exported app.
 
 ```
 USAGE
-  $ witcli import
+  $ wittycli import
 
 OPTIONS
   -a, --auth=auth
@@ -182,15 +182,15 @@ EXAMPLE
   $ wittycli import --name=witapp --private --file ./app.zip
 ```
 
-_See code: [src\commands\import.ts](https://github.com/ShyykoSerhiy/witcli/blob/v0.0.3/src\commands\import.ts)_
+_See code: [src\commands\import.ts](https://github.com/ShyykoSerhiy/wittycli/blob/v0.0.3/src\commands\import.ts)_
 
-## `witcli message`
+## `wittycli message`
 
 Returns the extracted meaning from a sentence, based on the app data.
 
 ```
 USAGE
-  $ witcli message
+  $ wittycli message
 
 OPTIONS
   -a, --auth=auth
@@ -226,15 +226,15 @@ EXAMPLE
   $ wittycli message --query="Set temperature to 70 degrees" --numberofintents=8
 ```
 
-_See code: [src\commands\message.ts](https://github.com/ShyykoSerhiy/witcli/blob/v0.0.3/src\commands\message.ts)_
+_See code: [src\commands\message.ts](https://github.com/ShyykoSerhiy/wittycli/blob/v0.0.3/src\commands\message.ts)_
 
-## `witcli test`
+## `wittycli test`
 
 Tests the wittycli app with the provided file of expected utterances.
 
 ```
 USAGE
-  $ witcli test
+  $ wittycli test
 
 OPTIONS
   -a, --auth=auth
@@ -262,5 +262,5 @@ EXAMPLE
   $ wittycli test --file="./example/test.json"
 ```
 
-_See code: [src\commands\test.ts](https://github.com/ShyykoSerhiy/witcli/blob/v0.0.3/src\commands\test.ts)_
+_See code: [src\commands\test.ts](https://github.com/ShyykoSerhiy/wittycli/blob/v0.0.3/src\commands\test.ts)_
 <!-- commandsstop -->

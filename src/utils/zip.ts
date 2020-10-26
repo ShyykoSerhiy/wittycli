@@ -4,8 +4,8 @@ import { join } from 'path';
 import { downloadFile } from './download';
 
 const tempFileName = async () => {
-  const tmpDirPath = await promises.mkdtemp('witcli');
-  return { tmpFilePath: join(tmpDirPath, 'witcli.zip'), tmpDirPath };
+  const tmpDirPath = await promises.mkdtemp('wittycli');
+  return { tmpFilePath: join(tmpDirPath, 'wittycli.zip'), tmpDirPath };
 };
 
 export const unzip = (file: string, directory: string) => {
@@ -30,6 +30,6 @@ export const unzipFromUrl = async (url: string, directory: string) => {
 
 export const zipDirToBuffer = (dir: string) => {
   const zip = new AdmZip();
-  zip.addLocalFolder(dir, 'witcli');
+  zip.addLocalFolder(dir, 'wittycli');
   return zip.toBuffer();
 };
