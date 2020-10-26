@@ -1,8 +1,16 @@
 import { Command, flags } from '@oclif/command';
 import { commonFlags } from '../common';
-import { createWithClientFromFlags } from '../wit/client';
+import { createWithClientFromFlags, createWitClient, ImportPostResponse } from '../wit/client';
 import { zipDirToBuffer } from '../utils/zip';
 import { withErrorsAndOutput } from '../utils/output';
+
+const wait = (timeout: number) => {
+  return new Promise((res) => {
+    setTimeout(() => {
+      res();
+    }, timeout);
+  });
+};
 
 export default class Import extends Command {
   static description = 'Create a new app with all the app data from the exported app.';
@@ -31,6 +39,11 @@ export default class Import extends Command {
       char: 'p',
       required: false,
     }),
+    wait: flags.boolean({
+      description: 'If true the cli will wait for the app training to complete via long polling.',
+      char: 'w',
+      required: false,
+    }),
   };
 
   async run() {
@@ -40,28 +53,38 @@ export default class Import extends Command {
       async () => {
         const wittyClient = createWithClientFromFlags(flags);
 
+        if (!flags.dir && !flags.file) {
+          this.error(`You need to provide one of the 'file' or 'dir' params.`);
+        }
+
+        let result: ImportPostResponse | null = null;
         if (flags.file) {
-          const result = await wittyClient.import.post(
+          result = await wittyClient.import.post(
             {
               name: flags.name,
               private: flags.private,
             },
             flags.file,
           );
-          return result;
         }
         if (flags.dir) {
           const buffer = zipDirToBuffer(flags.dir);
-          const result = await wittyClient.import.post(
+          result = await wittyClient.import.post(
             {
               name: flags.name,
               private: flags.private,
             },
             buffer,
           );
-          return result;
         }
-        this.error(`You need to provide one of the 'file' or 'dir' params.`);
+        const nonNullResult = result!;
+        const newWittyClient = createWitClient({ token: nonNullResult.access_token });
+        // eslint-disable-next-line no-await-in-loop
+        while ((await newWittyClient.apps.app.get({ app: nonNullResult.app_id })).training_status !== 'done') {
+          // eslint-disable-next-line no-await-in-loop
+          await wait(/** 10 seconds */ 10 * 1000);
+        }
+        return nonNullResult!;
       },
       this,
       flags.dot,

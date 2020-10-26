@@ -123,6 +123,52 @@ export interface ImportPostResponse {
   app_id: string;
 }
 
+export interface AppsAppGetUrlParams {
+  /**
+   * Id of the new app.
+   */
+  app: string;
+}
+
+export interface AppsAppGetResponse {
+  /**
+   * 	A unique identifier for your app.
+   */
+  id: string;
+  /**
+   * 	The name of your app.
+   */
+  name: string;
+  /**
+   * 	Language code, in the ISO 639-1 format.
+   */
+  lang: string;
+  /**
+   * 	Private if true.
+   */
+  private: boolean;
+  /**
+   * Date and time of your app creation (ISO8601).
+   */
+  created_at: string;
+  /**
+   * Duration of the last training for your app (in seconds).
+   */
+  last_training_duration_secs: number;
+  /**
+   * Date and time of the next machine learning training for your app (ISO8601).
+   */
+  will_train_at: string;
+  /**
+   * 	Date and time of the next machine learning training for your app (ISO8601).
+   */
+  last_trained_at: string;
+  /**
+   * The current training status of your app (one of: done, scheduled, ongoing).
+   */
+  training_status: 'done' | 'scheduled' | 'ongoing';
+}
+
 export const createWitClient = ({ token, apiVersion, witUrl = DEFAULT_WIT_URL }: WitClientOptions) => {
   const defaultHeaders: Headers = new Headers({
     Authorization: `Bearer ${token}`,
@@ -234,6 +280,15 @@ export const createWitClient = ({ token, apiVersion, witUrl = DEFAULT_WIT_URL }:
        */
       post: async (body: AppsPostBody): Promise<AppsPostResponse> => {
         return req({ urlPart: '/apps', method: METHOD.POST, body });
+      },
+      app: {
+        /**
+         * Returns an object representation of the specified app.
+         * @param {AppsAppGetResponse} urlParams query params
+         */
+        get: async (urlParams: AppsAppGetUrlParams): Promise<AppsAppGetResponse> => {
+          return req({ urlPart: `/apps/${urlParams.app}`, method: METHOD.GET });
+        },
       },
     },
   };
