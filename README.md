@@ -19,7 +19,7 @@ $ npm install -g wittycli
 $ wittycli COMMAND
 running command...
 $ wittycli (-v|--version|version)
-wittycli/0.0.6 win32-x64 node-v12.19.0
+wittycli/0.0.7 win32-x64 node-v12.19.0
 $ wittycli --help [COMMAND]
 USAGE
   $ wittycli COMMAND
@@ -80,7 +80,7 @@ EXAMPLE
   $ wittycli apps create --name=witapp --lang=en --private --timezone=Europe/Brussels
 ```
 
-_See code: [src\commands\apps\post.ts](https://github.com/ShyykoSerhiy/wittycli/blob/v0.0.6/src\commands\apps\post.ts)_
+_See code: [src\commands\apps\post.ts](https://github.com/ShyykoSerhiy/wittycli/blob/v0.0.7/src\commands\apps\post.ts)_
 
 ## `wittycli export`
 
@@ -121,7 +121,7 @@ EXAMPLE
   $ wittycli export --output="./app.zip"
 ```
 
-_See code: [src\commands\export.ts](https://github.com/ShyykoSerhiy/wittycli/blob/v0.0.6/src\commands\export.ts)_
+_See code: [src\commands\export.ts](https://github.com/ShyykoSerhiy/wittycli/blob/v0.0.7/src\commands\export.ts)_
 
 ## `wittycli help [COMMAND]`
 
@@ -177,6 +177,9 @@ OPTIONS
       time to transition to the new implementation if you want. As of June 1st, 2014, requests that do not include a 
       version parameter will hit the latest version of our API.
 
+  -w, --wait
+      If true the cli will wait for the app training to complete via long polling.
+
   --dot=dot
       Use dot notation (https://github.com/rhalff/dot-object#pick-a-value-using-dot-notation) to retrieve a value from 
       json response.
@@ -185,7 +188,7 @@ EXAMPLE
   $ wittycli import --name=witapp --private --file ./app.zip
 ```
 
-_See code: [src\commands\import.ts](https://github.com/ShyykoSerhiy/wittycli/blob/v0.0.6/src\commands\import.ts)_
+_See code: [src\commands\import.ts](https://github.com/ShyykoSerhiy/wittycli/blob/v0.0.7/src\commands\import.ts)_
 
 ## `wittycli message`
 
@@ -230,7 +233,7 @@ EXAMPLE
   $ wittycli message --query="Set temperature to 70 degrees" --numberofintents=8
 ```
 
-_See code: [src\commands\message.ts](https://github.com/ShyykoSerhiy/wittycli/blob/v0.0.6/src\commands\message.ts)_
+_See code: [src\commands\message.ts](https://github.com/ShyykoSerhiy/wittycli/blob/v0.0.7/src\commands\message.ts)_
 
 ## `wittycli test`
 
@@ -267,5 +270,5 @@ EXAMPLE
   $ wittycli test --file="./example/test.json"
 ```
 
-_See code: [src\commands\test.ts](https://github.com/ShyykoSerhiy/wittycli/blob/v0.0.6/src\commands\test.ts)_
+_See code: [src\commands\test.ts](https://github.com/ShyykoSerhiy/wittycli/blob/v0.0.7/src\commands\test.ts)_
 <!-- commandsstop -->
