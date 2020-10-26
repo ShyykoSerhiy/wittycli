@@ -19,7 +19,7 @@ $ npm install -g wittycli
 $ wittycli COMMAND
 running command...
 $ wittycli (-v|--version|version)
-wittycli/0.0.4 win32-x64 node-v12.19.0
+wittycli/0.0.5 win32-x64 node-v12.19.0
 $ wittycli --help [COMMAND]
 USAGE
   $ wittycli COMMAND
@@ -47,7 +47,8 @@ OPTIONS
   -a, --auth=auth
       (required) Wit.ai uses OAuth2 as an authorization layer. As such, every API request must contain an Authorize HTTP 
       header with a token. Access tokens are app and user specific. Please do not share the token with anyone, nor post it 
-      publicly. You can obtain one in Settings for your
+      publicly. You can obtain one in Settings for your app. Alternatively you can set WIT_AUTH_TOKEN environment 
+      variable.
 
   -h, --help
       show CLI help
@@ -79,7 +80,7 @@ EXAMPLE
   $ wittycli apps create --name=witapp --lang=en --private --timezone=Europe/Brussels
 ```
 
-_See code: [src\commands\apps\post.ts](https://github.com/ShyykoSerhiy/wittycli/blob/v0.0.4/src\commands\apps\post.ts)_
+_See code: [src\commands\apps\post.ts](https://github.com/ShyykoSerhiy/wittycli/blob/v0.0.5/src\commands\apps\post.ts)_
 
 ## `wittycli export`
 
@@ -93,7 +94,8 @@ OPTIONS
   -a, --auth=auth
       (required) Wit.ai uses OAuth2 as an authorization layer. As such, every API request must contain an Authorize HTTP 
       header with a token. Access tokens are app and user specific. Please do not share the token with anyone, nor post it 
-      publicly. You can obtain one in Settings for your
+      publicly. You can obtain one in Settings for your app. Alternatively you can set WIT_AUTH_TOKEN environment 
+      variable.
 
   -d, --dir=dir
       Path of the output directory. If set this command will download a ZIP file and unzip to a provided directory.
@@ -119,7 +121,7 @@ EXAMPLE
   $ wittycli export --output="./app.zip"
 ```
 
-_See code: [src\commands\export.ts](https://github.com/ShyykoSerhiy/wittycli/blob/v0.0.4/src\commands\export.ts)_
+_See code: [src\commands\export.ts](https://github.com/ShyykoSerhiy/wittycli/blob/v0.0.5/src\commands\export.ts)_
 
 ## `wittycli help [COMMAND]`
 
@@ -150,7 +152,8 @@ OPTIONS
   -a, --auth=auth
       (required) Wit.ai uses OAuth2 as an authorization layer. As such, every API request must contain an Authorize HTTP 
       header with a token. Access tokens are app and user specific. Please do not share the token with anyone, nor post it 
-      publicly. You can obtain one in Settings for your
+      publicly. You can obtain one in Settings for your app. Alternatively you can set WIT_AUTH_TOKEN environment 
+      variable.
 
   -d, --dir=dir
       Path of the import directory. If set this command will ZIP provided directory and import it.
@@ -182,7 +185,7 @@ EXAMPLE
   $ wittycli import --name=witapp --private --file ./app.zip
 ```
 
-_See code: [src\commands\import.ts](https://github.com/ShyykoSerhiy/wittycli/blob/v0.0.4/src\commands\import.ts)_
+_See code: [src\commands\import.ts](https://github.com/ShyykoSerhiy/wittycli/blob/v0.0.5/src\commands\import.ts)_
 
 ## `wittycli message`
 
@@ -196,7 +199,8 @@ OPTIONS
   -a, --auth=auth
       (required) Wit.ai uses OAuth2 as an authorization layer. As such, every API request must contain an Authorize HTTP 
       header with a token. Access tokens are app and user specific. Please do not share the token with anyone, nor post it 
-      publicly. You can obtain one in Settings for your
+      publicly. You can obtain one in Settings for your app. Alternatively you can set WIT_AUTH_TOKEN environment 
+      variable.
 
   -h, --help
       show CLI help
@@ -226,7 +230,7 @@ EXAMPLE
   $ wittycli message --query="Set temperature to 70 degrees" --numberofintents=8
 ```
 
-_See code: [src\commands\message.ts](https://github.com/ShyykoSerhiy/wittycli/blob/v0.0.4/src\commands\message.ts)_
+_See code: [src\commands\message.ts](https://github.com/ShyykoSerhiy/wittycli/blob/v0.0.5/src\commands\message.ts)_
 
 ## `wittycli test`
 
@@ -240,7 +244,8 @@ OPTIONS
   -a, --auth=auth
       (required) Wit.ai uses OAuth2 as an authorization layer. As such, every API request must contain an Authorize HTTP 
       header with a token. Access tokens are app and user specific. Please do not share the token with anyone, nor post it 
-      publicly. You can obtain one in Settings for your
+      publicly. You can obtain one in Settings for your app. Alternatively you can set WIT_AUTH_TOKEN environment 
+      variable.
 
   -f, --file=file
       (required) Filepath of the file with utterances in format of the Array<ResponseOfTheMessageAPI>
@@ -262,5 +267,5 @@ EXAMPLE
   $ wittycli test --file="./example/test.json"
 ```
 
-_See code: [src\commands\test.ts](https://github.com/ShyykoSerhiy/wittycli/blob/v0.0.4/src\commands\test.ts)_
+_See code: [src\commands\test.ts](https://github.com/ShyykoSerhiy/wittycli/blob/v0.0.5/src\commands\test.ts)_
 <!-- commandsstop -->
