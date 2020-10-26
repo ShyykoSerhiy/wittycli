@@ -243,4 +243,4 @@ export const createWithClientFromFlags = ({ auth, version }: { auth: string; ver
   return createWitClient({ token: auth, apiVersion: version });
 };
 
-export type WitClient = ReturnType<typeof createWitClient>;
+export type WittyClient = ReturnType<typeof createWitClient>;

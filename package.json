@@ -1,11 +1,11 @@
 {
-  "name": "witcli",
+  "name": "wittycli",
   "description": "Wit.ai CLI",
   "version": "0.0.2",
   "bin": {
-    "witcli": "./bin/run"
+    "wittycli": "./bin/run"
   },
-  "bugs": "https://github.com/ShyykoSerhiy/witcli/issues",
+  "bugs": "https://github.com/ShyykoSerhiy/wittycli/issues",
   "dependencies": {
     "@oclif/command": "^1.8.0",
     "@oclif/config": "^1.17.0",

@@ -7,7 +7,7 @@ import { withErrorsAndOutput } from '../utils/output';
 export default class Import extends Command {
   static description = 'Create a new app with all the app data from the exported app.';
 
-  static examples = [`$ witcli import --name=witapp --private --file ./app.zip`];
+  static examples = [`$ wittycli import --name=witapp --private --file ./app.zip`];
 
   static flags = {
     ...commonFlags,
@@ -38,10 +38,10 @@ export default class Import extends Command {
 
     withErrorsAndOutput(
       async () => {
-        const witClient = createWithClientFromFlags(flags);
+        const wittyClient = createWithClientFromFlags(flags);
 
         if (flags.file) {
-          const result = await witClient.import.post(
+          const result = await wittyClient.import.post(
             {
               name: flags.name,
               private: flags.private,
@@ -52,7 +52,7 @@ export default class Import extends Command {
         }
         if (flags.dir) {
           const buffer = zipDirToBuffer(flags.dir);
-          const result = await witClient.import.post(
+          const result = await wittyClient.import.post(
             {
               name: flags.name,
               private: flags.private,

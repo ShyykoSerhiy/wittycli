@@ -1,6 +1,6 @@
 import { Command, flags } from '@oclif/command';
 import { commonFlags } from '../common';
-import { createWithClientFromFlags, MessageGetResponse, WitClient } from '../wit/client';
+import { createWithClientFromFlags, MessageGetResponse, WittyClient } from '../wit/client';
 import { withErrorsAndOutput } from '../utils/output';
 import { promises } from 'fs';
 import chalk from 'chalk';
@@ -10,10 +10,13 @@ type TestRule = MessageGetResponse;
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const { dot, ...commonFlagsWithoutDot } = commonFlags;
 
-const runTest = async (testRule: TestRule, witClient: WitClient): Promise<{ testRule: TestRule; error?: Error }> => {
+const runTest = async (
+  testRule: TestRule,
+  wittyClient: WittyClient,
+): Promise<{ testRule: TestRule; error?: Error }> => {
   const { text } = testRule;
   try {
-    const result = await witClient.message.get({
+    const result = await wittyClient.message.get({
       q: text,
     });
     const actualIntent = result.intents[0];
@@ -41,9 +44,9 @@ const runTest = async (testRule: TestRule, witClient: WitClient): Promise<{ test
 };
 
 export default class Test extends Command {
-  static description = 'Tests the witcli app with the provided file of expected utterances.';
+  static description = 'Tests the wittycli app with the provided file of expected utterances.';
 
-  static examples = [`$ witcli test --file="./example/test.json"`];
+  static examples = [`$ wittycli test --file="./example/test.json"`];
 
   static flags = {
     ...commonFlagsWithoutDot,
@@ -69,18 +72,18 @@ export default class Test extends Command {
         chalk.yellow(
           [
             '---------------------------------------------------',
-            '----                witcli test                ----',
+            '----                wittycli test                ----',
             '---------------------------------------------------',
           ].join('\n'),
         ),
       );
       const startTime = new Date();
 
-      const witClient = createWithClientFromFlags(flags);
+      const wittyClient = createWithClientFromFlags(flags);
       const testRules: TestRule[] = JSON.parse(await promises.readFile(flags.file, 'utf8'));
       const resultPromises = testRules.map((testRule) => {
         return bottleneck.schedule(() => {
-          return runTest(testRule, witClient);
+          return runTest(testRule, wittyClient);
         });
       });
       const results = await Promise.all(resultPromises);

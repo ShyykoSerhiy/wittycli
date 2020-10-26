@@ -6,7 +6,7 @@ import { withErrorsAndOutput } from '../utils/output';
 export default class Import extends Command {
   static description = 'Returns the extracted meaning from a sentence, based on the app data.';
 
-  static examples = [`$ witcli message --query="Set temperature to 70 degrees" --numberofintents=8`];
+  static examples = [`$ wittycli message --query="Set temperature to 70 degrees" --numberofintents=8`];
 
   static flags = {
     ...commonFlags,
@@ -34,9 +34,9 @@ export default class Import extends Command {
 
     withErrorsAndOutput(
       async () => {
-        const witClient = createWithClientFromFlags(flags);
+        const wittyClient = createWithClientFromFlags(flags);
 
-        return witClient.message.get({
+        return wittyClient.message.get({
           q: flags.query,
           tag: flags.tag,
           n: flags.numberofintents,

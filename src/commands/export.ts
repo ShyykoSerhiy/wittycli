@@ -9,7 +9,7 @@ export default class Export extends Command {
   static description =
     'Exports Get a URL where you can download a ZIP file containing all of your app data. This ZIP file can be used to create a new app with the same data.';
 
-  static examples = [`$ witcli export --output="./app.zip"`];
+  static examples = [`$ wittycli export --output="./app.zip"`];
 
   static flags = {
     ...commonFlags,
@@ -30,8 +30,8 @@ export default class Export extends Command {
     const { flags } = this.parse(Export);
 
     withErrorsAndOutput(async () => {
-      const witClient = createWithClientFromFlags(flags);
-      const file = await witClient.export.get();
+      const wittyClient = createWithClientFromFlags(flags);
+      const file = await wittyClient.export.get();
 
       if (flags.output) {
         this.log(`Downloading ZIP ${file.uri} to ${flags.output}`);

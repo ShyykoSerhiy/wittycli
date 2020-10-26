@@ -6,7 +6,7 @@ import { createWithClientFromFlags } from '../../wit/client';
 export default class Post extends Command {
   static description = 'Creates a new app for an existing user.';
 
-  static examples = [`$ witcli apps create --name=witapp --lang=en --private --timezone=Europe/Brussels`];
+  static examples = [`$ wittycli apps create --name=witapp --lang=en --private --timezone=Europe/Brussels`];
 
   static flags = {
     ...commonFlags,
@@ -38,10 +38,10 @@ export default class Post extends Command {
     const { flags } = this.parse(Post);
     withErrorsAndOutput(
       async () => {
-        const witClient = createWithClientFromFlags(flags);
+        const wittyClient = createWithClientFromFlags(flags);
         this.log(
           JSON.stringify(
-            await witClient.apps.post({
+            await wittyClient.apps.post({
               name: flags.name,
               lang: flags.lang,
               private: flags.private,
