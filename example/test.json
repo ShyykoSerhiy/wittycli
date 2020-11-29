@@ -6,15 +6,126 @@
                 "name": "get_temperature",
                 "confidence": 0.75
             }
-        ]
+        ],
+        "entities": {}
     },
     {
         "text": "Set temperature to 70 degrees",
+        "description": "Will NOT fail beacause because entities is ommited and no checks for entities are performed.",
         "intents": [
             {
                 "name": "set_temperature",
                 "confidence": 0.8
             }
         ]
+    },
+    {
+        "text": "Set temperature to 70 degrees",
+        "description": "Will fail beacause the amount of entity types is incorrect (should have wit$temperature:temperature)",
+        "intents": [
+            {
+                "name": "set_temperature",
+                "confidence": 0.8
+            }
+        ],
+        "entities": {}
+    },
+    {
+        "text": "Set temperature to 70 degrees",
+        "description":"Will fail beacause entity type is incorrect (should be wit$temperature:temperature instead of wit$weather:weather)",
+        "intents": [
+            {
+                "name": "set_temperature",
+                "confidence": 0.8
+            }
+        ],
+        "entities": {
+            "wit$weather:weather": [
+                {
+                    "name": "wit$temperature",
+                    "role": "temperature",
+                    "start": 19,
+                    "end": 29,
+                    "body": "70 degrees",
+                    "confidence": 0.95,
+                    "unit": "degree",
+                    "type": "value",
+                    "value": 70
+                }
+            ]
+        }
+    },
+    {
+        "text": "Set temperature to 70 degrees and then to 80 degrees",
+        "description":"Will fail beacause the amount of entities for wit$temperature:temperature is incorrect (should be 2)",
+        "intents": [
+            {
+                "name": "set_temperature",
+                "confidence": 0.8
+            }
+        ],
+        "entities": {
+            "wit$temperature:temperature": [
+                {
+                    "name": "wit$temperature",
+                    "role": "temperature",
+                    "start": 19,
+                    "end": 29,
+                    "body": "70 degrees",
+                    "confidence": 0.95,
+                    "unit": "degree",
+                    "type": "value",
+                    "value": 70
+                }
+            ]
+        }
+    },
+    {
+        "text": "Set temperature to 70 degrees and then to 80 degrees",
+        "description": "Will fail beacause confidence of first entity is too low",
+        "intents": [
+            {
+                "name": "set_temperature",
+                "confidence": 0.8
+            }
+        ],
+        "entities": {
+            "wit$temperature:temperature": [
+                {
+                    "name": "wit$temperature",
+                    "role": "temperature",
+                    "confidence": 0.99
+                },
+                {
+                    "name": "wit$temperature",
+                    "role": "temperature",
+                    "confidence": 0.99
+                }
+            ]
+        }
+    },
+    {
+        "text": "Set temperature to 70 degrees",
+        "description":"Will fail beacause some of the entity values are incorrect",
+        "intents": [
+            {
+                "name": "set_temperature",
+                "confidence": 0.8
+            }
+        ],
+        "entities": {
+            "wit$temperature:temperature": [
+                {
+                    "name": "wit$temperature",
+                    "role": "temperature",
+                    "start": 20,
+                    "end": 30,
+                    "body": "70 degrees",
+                    "unit": "degree",
+                    "type": "value",
+                    "value": 70
+                }
+            ]
+        }
     }
 ]

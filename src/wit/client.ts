@@ -67,6 +67,9 @@ export interface MessageGetResponse {
   text: string;
   intents: MessageGetIntent[];
   app_id: string;
+  entities: {
+    [key: string]: MessageGetEntity[];
+  };
 }
 
 export interface AppsPostBody {

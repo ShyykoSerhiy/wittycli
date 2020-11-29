@@ -3,6 +3,7 @@ import { commonFlags } from '../common';
 import { createWithClientFromFlags, MessageGetResponse, WittyClient } from '../wit/client';
 import { withErrorsAndOutput } from '../utils/output';
 import { promises } from 'fs';
+import { isEqual } from 'lodash';
 import chalk from 'chalk';
 import Bottleneck from 'bottleneck';
 
@@ -19,13 +20,14 @@ const runTest = async (
     const result = await wittyClient.message.get({
       q: text,
     });
+    // testing intents
     const actualIntent = result.intents[0];
     const expectedIntent = testRule.intents[0];
     if (actualIntent.name !== expectedIntent.name) {
       return {
         testRule,
         error: new Error(
-          `Test "${text}" returned incorrect intent. Expected :"${expectedIntent.name}". Actual: "${actualIntent.name}"`,
+          `Test "${text}" returned incorrect intent. Expected: "${expectedIntent.name}". Actual: "${actualIntent.name}"`,
         ),
       };
     }
@@ -33,10 +35,90 @@ const runTest = async (
       return {
         testRule,
         error: new Error(
-          `Test "${text}" confidence degraded. Expected :"${expectedIntent.confidence}". Actual: "${actualIntent.confidence}"`,
+          `Test "${text}" confidence degraded. Expected: "${expectedIntent.confidence}". Actual: "${actualIntent.confidence}"`,
         ),
       };
     }
+    // testing entities
+    if (!testRule.entities) {
+      // no need to test entities if they are not provided.
+      return { testRule };
+    }
+    const actualEntities = result.entities;
+    const expectedEntities = testRule.entities;
+    const actualEntitiesKeys = Object.keys(actualEntities);
+    const expectedEntitiesKeys = Object.keys(expectedEntities);
+
+    const actualEntitiesJSON = JSON.stringify(actualEntities);
+    const expectedEntitiesJSON = JSON.stringify(expectedEntities);
+    const entitiesErrorMessagePart = `Expected entitites: ${expectedEntitiesJSON}.\nActual entities: ${actualEntitiesJSON}`;
+    if (actualEntitiesKeys.length !== expectedEntitiesKeys.length) {
+      return {
+        testRule,
+        error: new Error(
+          `Test "${text}" entities mismatch. Different amount of entity types. Expected :"${expectedEntitiesKeys.length}". Actual: "${actualEntitiesKeys.length}.\n${entitiesErrorMessagePart}"`,
+        ),
+      };
+    }
+    for (const actualEntityKey of actualEntitiesKeys) {
+      if (!(actualEntityKey in expectedEntities)) {
+        return {
+          testRule,
+          error: new Error(
+            `Test "${text}" entities mismatch. ${actualEntityKey} is not in expected entities ${JSON.stringify(
+              expectedEntitiesKeys,
+            )}. Expected :"${expectedEntitiesKeys.length}". Actual: "${
+              actualEntitiesKeys.length
+            }.\n${entitiesErrorMessagePart}"`,
+          ),
+        };
+      }
+
+      const actualEntityList = actualEntities[actualEntityKey];
+      const expectedEntityList = expectedEntities[actualEntityKey];
+      if (actualEntityList.length !== expectedEntityList.length) {
+        return {
+          testRule,
+          error: new Error(
+            `Test "${text}" entities mismatch. Entity ${actualEntityKey} has incorect amount of entities. Expected :"${expectedEntityList.length}". Actual: "${actualEntityList.length}.\n${entitiesErrorMessagePart}"`,
+          ),
+        };
+      }
+
+      for (let i = 0; i < actualEntityList.length; i++) {
+        const actualEntity = actualEntityList[i];
+        const expectedEntity = expectedEntityList[i];
+
+        for (const expectedEntityField of Object.keys(expectedEntity)) {
+          /* eslint max-depth: ["error", 6] */
+          if (expectedEntityField === 'confidence') {
+            if (actualEntity.confidence < expectedEntity.confidence) {
+              return {
+                testRule,
+                error: new Error(
+                  `Test "${text}" entities mismatch. Confidence for entity ${actualEntityKey} degraded. Expected: "${expectedEntity.confidence}". Actual: "${actualEntity.confidence}"\n${entitiesErrorMessagePart}`,
+                ),
+              };
+            }
+            continue;
+          }
+
+          const actualEntityFieldValue = (actualEntity as any)[expectedEntityField];
+          const expectedEntityFieldValue = (expectedEntity as any)[expectedEntityField];
+          if (!isEqual(actualEntityFieldValue, expectedEntityFieldValue)) {
+            return {
+              testRule,
+              error: new Error(
+                `Test "${text}" entities mismatch. Field "${expectedEntityField}" for entity "${actualEntityKey}" has unexpected value. Expected: "${JSON.stringify(
+                  expectedEntityFieldValue,
+                )}". Actual: "${JSON.stringify(actualEntityFieldValue)}"\n${entitiesErrorMessagePart}`,
+              ),
+            };
+          }
+        }
+      }
+    }
+
     return { testRule };
   } catch (error) {
     return { testRule, error };
@@ -44,7 +126,7 @@ const runTest = async (
 };
 
 export default class Test extends Command {
-  static description = 'Tests the wittycli app with the provided file of expected utterances.';
+  static description = 'Tests the wittycli app with the provided file of expected utterances and entities.';
 
   static examples = [`$ wittycli test --file="./example/test.json"`];
 
